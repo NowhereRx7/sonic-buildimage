@@ -9,7 +9,8 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
       with:
         submodules: 'recursive'
 
@@ -21,3 +22,12 @@ jobs:
 
     - name: Install dependencies
       run: make SONIC_BUILD_JOBS=4 all
+
+    - name: "Copy target"
+      run: cp -r target/* /data/sonic/
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: sonic-broadcom.bin
+        path: target/sonic-broadcom.bin
