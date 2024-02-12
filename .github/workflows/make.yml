@@ -14,16 +14,16 @@ jobs:
       with:
         submodules: 'recursive'
 
-    - name: init
+    - name: Init
       run: make init
 
-    - name: configure
+    - name: Configure
       run: make configure PLATFORM=broadcom
 
-    - name: Install dependencies
+    - name: Build
       run: make SONIC_BUILD_JOBS=4 all
 
-    - name: "Copy target"
+    - name: 'Copy target'
       run: cp -r target/* /data/sonic/
 
     - name: 'Upload Artifact'
