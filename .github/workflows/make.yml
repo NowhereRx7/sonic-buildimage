@@ -23,7 +23,7 @@ jobs:
       run: make configure PLATFORM=broadcom
 
     - name: Build
-      run: make SONIC_BUILD_JOBS=4 all
+      run: make SONIC_BUILD_JOBS=$(nproc) all
 
     - name: 'Copy target'
       run: cp -r target/* /data/sonic/
