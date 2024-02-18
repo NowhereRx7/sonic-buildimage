@@ -19,13 +19,13 @@ jobs:
     - name: Init
       run: make init
 
-    - name: Configure
+    - name: Configure PLATFORM
       run: make configure PLATFORM=broadcom
     
-    - name: Build
-      run: make SONIC_BUILD_JOBS=$(nproc) all
+    - name: Make
+      run: make SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache all
 
-    - name: 'Copy target'
+    - name: Copy target
       run: rsync -a --stats --delete target/ /data/sonic-target/
 
 #    - name: 'Upload Artifact'
