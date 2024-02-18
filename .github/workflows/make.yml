@@ -1,13 +1,14 @@
 name: Build PLATFORM=broadcom
 
 on:
+  push:
+    branches: 
+      - master
   workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: self-hosted
-
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -15,21 +16,20 @@ jobs:
         submodules: 'recursive'
         fetch-depth: 0
         fetch-tags: true
-
     - name: Init
       run: make init
 
     - name: Configure
       run: make configure PLATFORM=broadcom
-
+    
     - name: Build
-      run: make SONIC_BUILD_JOBS=4 all
+      run: make SONIC_BUILD_JOBS=$(nproc) all
 
     - name: 'Copy target'
-      run: cp -r target/* /data/sonic/
+      run: rsync -a --stats --delete target/ /data/sonic-target/
 
-    - name: 'Upload Artifact'
-      uses: actions/upload-artifact@v4
-      with:
-        name: sonic-broadcom.bin
-        path: target/sonic-broadcom.bin
+#    - name: 'Upload Artifact'
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: sonic-broadcom.bin
+#        path: target/sonic-broadcom.bin
