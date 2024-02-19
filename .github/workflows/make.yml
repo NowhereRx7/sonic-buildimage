@@ -23,7 +23,7 @@ jobs:
       run: make configure PLATFORM=broadcom
     
     - name: Make
-      run: make SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache target/sonic-broadcom.bin
+      run: make SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache http_proxy='http://s-r815.otfs:3142' target/sonic-broadcom.bin
 
     - name: Copy target
       run: rsync -a --stats --delete target/ /data/sonic-target/
