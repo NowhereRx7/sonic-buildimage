@@ -11,12 +11,17 @@ jobs:
     runs-on: self-hosted
     timeout-minutes: 720
     steps:
+    
+    - name: Chown workspace
+      run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      
     - name: Checkout
       uses: actions/checkout@v4
       with:
         submodules: 'recursive'
         fetch-depth: 0
         fetch-tags: true
+    
     - name: Init
       run: make init
 
