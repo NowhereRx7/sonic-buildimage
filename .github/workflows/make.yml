@@ -26,7 +26,7 @@ jobs:
       run: make init
 
     - name: Configure PLATFORM
-      run: make http_proxy='http://s-r815.otfs:3142' SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache GZ_COMPRESS_PROGRAM=pigz configure PLATFORM=broadcom
+      run: make SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache GZ_COMPRESS_PROGRAM=pigz configure PLATFORM=broadcom
     
     - name: Make
       run: make SONIC_BUILD_JOBS=$(nproc) SONIC_DPKG_CACHE_METHOD=cache SONIC_DPKG_CACHE_SOURCE=/data/sonic-runner/_cache SONIC_VERSION_CACHE_METHOD=cache GZ_COMPRESS_PROGRAM=pigz target/sonic-broadcom.bin
